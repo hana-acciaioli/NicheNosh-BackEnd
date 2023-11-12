@@ -13,8 +13,9 @@ CREATE TABLE items (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   user_id BIGINT ,
   description VARCHAR NOT NULL,
-  bought BOOLEAN NOT NULL DEFAULT(false),
+  prioritize BOOLEAN NOT NULL DEFAULT(false),
   qty INT,
+  metric VARCHAR,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   FOREIGN KEY (user_id) REFERENCES users(id)
 )

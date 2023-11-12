@@ -43,15 +43,16 @@ describe('items', () => {
   });
   it('POST /api/v1/items creates a new shopping item with the current user', async () => {
     const [agent, user] = await registerAndLogin();
-    const newItem = { description: 'eggs', qty: 12 };
+    const newItem = { description: 'eggs', qty: 12, metric: 'ea.' };
     const resp = await agent.post('/api/v1/items').send(newItem);
     expect(resp.status).toEqual(200);
     expect(resp.body).toEqual({
       id: expect.any(String),
       description: newItem.description,
       qty: newItem.qty,
+      metric: newItem.metric,
       userId: user.id,
-      bought: false,
+      prioritize: false,
     });
   });
 
@@ -90,9 +91,9 @@ describe('items', () => {
     });
     const resp = await agent
       .put(`/api/v1/items/${item.id}`)
-      .send({ bought: true });
+      .send({ prioritize: true });
     expect(resp.status).toBe(200);
-    expect(resp.body).toEqual({ ...item, bought: true });
+    expect(resp.body).toEqual({ ...item, prioritize: true });
   });
 
   it('UPDATE /api/v1/items/:id should 403 for invalid users', async () => {
@@ -107,7 +108,7 @@ describe('items', () => {
     });
     const resp = await agent
       .put(`/api/v1/items/${item.id}`)
-      .send({ bought: true });
+      .send({ purchased: true });
     expect(resp.status).toBe(403);
   });
 
