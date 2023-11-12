@@ -5,3 +5,10 @@
 Run 'npm i' to initialize
 Run 'npm run setup-db' to setup the database. Don't forget those environment variables!
 Run 'npm run start' to activate local server
+
+## The plan
+
+- Store food pantry in NicheNosh server
+- Connect to OpenAI API
+- Send personal food pantry to OpenAI
+- Connect front end with CORs
